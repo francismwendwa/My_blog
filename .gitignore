@@ -1,0 +1,38 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# Environment variables
+*.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Flask-related
+instance/
+*.db
+*.sqlite3
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# Logs
+*.log
+
+# Render build artifacts
+render.yaml
