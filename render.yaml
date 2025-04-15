@@ -4,5 +4,6 @@ services:
     env: python
     plan: free
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "python my_blog.py"
+    startCommand: "gunicorn -b 0.0.0.0:10000 my_blog:app"
+
     autoDeploy: true
