@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="my-4">Blog</h1>
+
+        {% for post in posts %}
+            <article class="media content-section mb-4">
+                <div class="media-body">
+                    <div class="article-metadata mb-2">
+                        <a class="mr-2 text-primary" href="#">{{ post.author }}</a>
+                        <small class="text-muted">{{ post.date }}</small>
+                    </div>
+                    <h2 class="article-title mb-3">
+                        <a class="text-dark" href="#">{{ post.title }}</a>
+                    </h2>
+                    <p class="article-content">{{ post.content }}</p>
+
+                    <a href="#" class="btn btn-outline-primary btn-sm">Read more</a>
+                </div>
+            </article>
+            <hr class="my-4">
+        {% endfor %}
+    </div>
+{% endblock %}

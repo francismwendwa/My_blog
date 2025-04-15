@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+    <section id="about" style="background-color: #f4f4f4; padding: 50px 20px;">
+    <div class="container" style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
+        <h1 style="text-align: center; color: #333;">About Me</h1>
+        <p style="font-size: 18px; color: #555; line-height: 1.6;">I’m <strong style="color: #0073e6;"><a href=" {{ url_for('home') }} " style="color: #0073e6; text-decoration: none;">Francis Mwendwa</a></strong> with a strong background in <strong>cloud computing, network architecture, cybersecurity, and software development</strong>. With expertise in <strong>AWS, Python (Flask & Django), Terraform, and Docker</strong>, I specialize in building scalable cloud solutions, automating infrastructure, and securing networks.</p>
+
+        <p style="font-size: 18px; color: #555; line-height: 1.6;">I have <strong>hands-on experience</strong> working with <strong>enterprise solutions</strong> and have collaborated on projects involving <strong>Google Cloud, Azure DevOps, and cybersecurity frameworks</strong>. My journey started with a <strong>Bachelor’s degree in Information Technology</strong> from <strong>Kenyatta University</strong>, and since then, I’ve obtained key certifications, including:</p>
+
+        <ul style="font-size: 18px; color: #555; line-height: 1.6; list-style-type: none; padding-left: 0;">
+            <li style="background: #0073e6; color: white; padding: 10px; border-radius: 5px; margin-bottom: 5px;">AWS Cloud practitioner</li>
+            <li style="background: #0073e6; color: white; padding: 10px; border-radius: 5px; margin-bottom: 5px;">AWS Solution Architect Associate</li>
+            <li style="background: #0073e6; color: white; padding: 10px; border-radius: 5px; margin-bottom: 5px;">Cisco Introduction to Cybersecurity</li>
+            <li style="background: #0073e6; color: white; padding: 10px; border-radius: 5px; margin-bottom: 5px;">Cisco Endpoint Security</li>
+            <li style="background: #0073e6; color: white; padding: 10px; border-radius: 5px; margin-bottom: 5px;">Cisco Network Defense</li>
+        </ul>
+
+        <p style="font-size: 18px; color: #555; line-height: 1.6;">Beyond cloud and network engineering, I enjoy researching emerging technologies, optimizing system performance, and mentoring aspiring tech professionals. My experience includes working with organizations such as the <strong>Ministry of Education</strong> (EMIS) and <strong>AICO</strong>, where I contributed to IT infrastructure and data-driven solutions.</p>
+
+        <p style="font-size: 18px; color: #555; line-height: 1.6;">Currently, I’m expanding my expertise in <strong>cybersecurity</strong>, learning about <strong>endpoint security, network defense, and ethical hacking</strong>, while also improving my skills in <strong>Dockerization and Kubernetes</strong>.</p>
+
+        <h2 style="text-align: center; color: #333; margin-top: 30px;">Let’s Connect!</h2>
+        <p style="font-size: 18px; text-align: center; color: #0073e6;"><strong><a href=" {{ url_for('contact') }}" style="color: #0073e6; text-decoration: none;">Contact Me</a></strong></p>
+    </div>
+</section>
+
+{% endblock content %}

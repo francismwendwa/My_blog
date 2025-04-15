@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <section id="certifications" style="background-color: #f4f4f4; padding: 50px 20px;">
+        <div class="container" style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
+            <h1 style="text-align: center; color: #333;">Certifications 🎓</h1>
+            <p style="font-size: 18px; color: #555; line-height: 1.6; text-align: center;">
+                This page highlights the certifications I have earned throughout my career, reflecting my commitment to excellence in cloud computing. Each certification represents a milestone in my professional growth, showcasing my dedication to mastering the latest technologies.
+            </p>
+
+            <p style="font-size: 18px; color: #555; line-height: 1.6; text-align: center;">
+                These certifications validate my capabilities and emphasize my passion for staying ahead of industry trends. Below, you'll find a list of my certifications with direct links to my credentials, providing a transparent view of my accomplishments.
+            </p>
+
+            <hr>
+
+            <h2 style="text-align: center; color: #333;">My Certifications 🎓</h2>
+            <ul style="font-size: 15px; color: #555; line-height: 1.6; list-style-type: none; padding-left: 0;">
+                <li style="background: #0073e6; color: white; padding: 2px; border-radius: 5px; margin-bottom: 10px;">
+                    <img src="{{ url_for('static', filename='CLF-001.png') }}" alt="AWS Certified Cloud Practitioner" class="profile-img">
+                    <strong><a href="https://www.credly.com/badges/88196477-2eae-4604-b451-6376a2494614/public_url" target="_blank" style="color: white; text-decoration: none;">AWS Certified Cloud Practitioner</a></strong>
+                </li>
+                <li style="background: #0073e6; color: white; padding: 15px; border-radius: 5px; margin-bottom: 10px;">
+                    <img src="{{ url_for('static', filename='SAA-001.png') }}" alt="AWS Certified Solutions Architect – Associate" class="profile-img">
+                    <strong><a href="https://www.credly.com/badges/c7a01a63-ad4e-45e4-be0b-fd493ee120c5/public_url" target="_blank" style="color: white; text-decoration: none;">AWS Certified Solutions Architect</a></strong>
+                </li>
+                <h2 style="text-align: center; color: #333;">My Cisco Badges 🎓</h2>
+                <li style="background: #0073e6; color: white; padding: 15px; border-radius: 5px; margin-bottom: 10px;">
+                   <a href="https://www.credly.com/badges/8596ada6-3d0e-4f46-848f-bed3d1970063/public_url" target="_blank">
+                       <img src="{{ url_for('static', filename='CYBER1.png') }}"
+                            alt="Introduction to Cybersecurity"
+                            class="profile-img">
+                   </a>
+                    <a href="https://www.credly.com/badges/7281b5f2-f315-4eb3-bef6-534493c3b90a/public_url" target="_blank">
+                       <img src="{{ url_for('static', filename='Network.png') }}"
+                            alt="Network Defense"
+                            class="profile-img">
+                   </a>
+                    <a href="https://www.credly.com/badges/503864c1-1946-4d27-a126-e699471593a5/public_url" target="_blank">
+                       <img src="{{ url_for('static', filename='Endpoint.png') }}"
+                            alt="Endpoint Security"
+                            class="profile-img">
+                   </a>
+                </li>
+
+            </ul>
+        </div>
+    </section>
+
+{% endblock %}
