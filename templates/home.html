@@ -1,33 +1,278 @@
-{% extends 'layout.html' %}
+{% extends "layout.html" %}
 
-{% block title %}Francis Mwendwa | Cloud Engineer{% endblock %}
+{% block extra_css %}
+<style>
+    /* Particle Background */
+    #particles-js {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+    /* Hero Section */
+    .hero {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+        overflow: hidden;
+    }
+
+    .hero-content {
+        text-align: center;
+        max-width: 800px;
+        padding: 2rem;
+    }
+
+    .hero-title {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .hero-subtitle {
+        font-size: 1.5rem;
+        color: var(--light-azure);
+        margin-bottom: 2rem;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.8s ease 0.2s forwards;
+    }
+
+    .typed-text {
+        color: var(--cyber-green);
+    }
+
+    /* Animated Button */
+    .cta-button {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: transparent;
+        border: 2px solid var(--cyber-green);
+        color: var(--cyber-green);
+        text-decoration: none;
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        opacity: 0;
+        animation: fadeInUp 0.8s ease 0.4s forwards;
+    }
+
+    .cta-button:hover {
+        background: var(--cyber-green);
+        color: var(--navy);
+    }
+
+    /* Skills Section */
+    .skills-section {
+        padding: 4rem 0;
+        background: var(--electric-blue);
+        position: relative;
+        z-index: 2;
+    }
+
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .skill-card {
+        background: rgba(165, 215, 232, 0.1);
+        padding: 2rem;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        transition: transform 0.3s ease;
+    }
+
+    .skill-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .skill-icon {
+        font-size: 2.5rem;
+        color: var(--cyber-green);
+        margin-bottom: 1rem;
+    }
+
+    /* Latest Projects Section */
+    .projects-preview {
+        padding: 4rem 0;
+        position: relative;
+        z-index: 2;
+    }
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .project-card {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        background: var(--electric-blue);
+    }
+
+    .project-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .project-info {
+        padding: 1.5rem;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+        }
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-<header class="bg-primary text-white text-center py-5">
-    <div class="container">
-        <h1>Welcome to My Cloud Engineer Portfolio</h1>
-        <p>Architecting Scalable & Secure Cloud Solutions | AWS Certified</p>
-        <a href="#projects" class="btn btn-light mt-3">View My Work</a>
+<!-- Particle Background -->
+<div id="particles-js"></div>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">Francis Mutiso</h1>
+        <h2 class="hero-subtitle">
+            <span class="typed-text"></span>
+        </h2>
+        <a href="{{ url_for('contact') }}" class="cta-button">Let's Connect <i class="fas fa-arrow-right"></i></a>
     </div>
-</header>
-
-<section id="about" class="container my-5">
-    <h2>About Me</h2>
-    <p>I am Francis Mwendwa, a passionate Cloud Engineer with expertise in AWS, Terraform, and Python. I specialize in designing scalable cloud architectures, optimizing infrastructure, and implementing security best practices.</p>
 </section>
 
-<section id="projects" class="container my-5">
-    <h2>Projects</h2>
-    <ul>
-        <li><strong>Automated Infrastructure Deployment</strong> - Terraform, AWS (EC2, RDS, S3)</li>
-        <li><strong>Serverless App with AWS Lambda</strong> - Python, API Gateway, DynamoDB</li>
-    </ul>
+<!-- Skills Section -->
+<section class="skills-section">
+    <div class="skills-grid">
+        <div class="skill-card">
+            <i class="fas fa-cloud skill-icon"></i>
+            <h3>Cloud Architecture</h3>
+            <p>Expertise in AWS, Azure, and cloud infrastructure design</p>
+        </div>
+        <div class="skill-card">
+            <i class="fas fa-network-wired skill-icon"></i>
+            <h3>Network Security</h3>
+            <p>Advanced networking and security implementation</p>
+        </div>
+        <div class="skill-card">
+            <i class="fas fa-shield-alt skill-icon"></i>
+            <h3>Cybersecurity</h3>
+            <p>Threat detection and security best practices</p>
+        </div>
+        <div class="skill-card">
+            <i class="fas fa-code skill-icon"></i>
+            <h3>Infrastructure as Code</h3>
+            <p>Automation and DevOps practices</p>
+        </div>
+    </div>
 </section>
 
-<section id="contact" class="container my-5">
-    <h2>Contact</h2>
-    <p>📧 Email: <a href="mailto:Francismwendwa230@gmail.com">Francismwendwa230@gmail.com</a></p>
-    <p>🔗 LinkedIn: <a href="https://www.linkedin.com/in/francis-mwendwa-mutiso-57a782238/" target="_blank">linkedin.com/in/francis-mwendwa</a></p>
-    <p>💻 GitHub: <a href="https://github.com/francismwendwa" target="_blank">github.com/yourgithub</a></p>
+<!-- Latest Projects Preview -->
+<section class="projects-preview">
+    <div class="projects-grid">
+        <div class="project-card">
+            <img src="{{ url_for('static', filename='images/project1.jpg') }}" alt="Project 1" class="project-image">
+            <div class="project-info">
+                <h3>Network Infrastructure Optimization</h3>
+                <p>Enhanced network performance for educational institutions</p>
+            </div>
+        </div>
+        <div class="project-card">
+            <img src="{{ url_for('static', filename='images/project2.jpg') }}" alt="Project 2" class="project-image">
+            <div class="project-info">
+                <h3>Cloud Migration Strategy</h3>
+                <p>Successful migration of legacy systems to cloud infrastructure</p>
+            </div>
+        </div>
+    </div>
 </section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script>
+    // Particle.js Configuration
+    particlesJS('particles-js',
+        {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#A5D7E8"
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#A5D7E8",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                }
+            }
+        });
+
+    // Typed.js Configuration
+    var typed = new Typed('.typed-text', {
+        strings: [
+            'Cloud & Network Security Specialist',
+            'Cybersecurity Professional',
+            'Infrastructure Engineer',
+            'Problem Solver'
+        ],
+        typeSpeed: 50,
+        backSpeed: 30,
+        backDelay: 2000,
+        loop: true
+    });
+</script>
 {% endblock %}

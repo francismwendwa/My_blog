@@ -34,5 +34,3 @@ instance/
 # Logs
 *.log
 
-# Render build artifacts
-render.yaml

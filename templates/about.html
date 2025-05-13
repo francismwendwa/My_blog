@@ -1,27 +1,299 @@
 {% extends "layout.html" %}
+
+{% block extra_css %}
+<style>
+    .about-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        position: relative;
+    }
+
+    /* Profile Section */
+    .profile-section {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 4rem;
+        margin-bottom: 4rem;
+        background: rgba(25, 55, 109, 0.3);
+        border-radius: 20px;
+        padding: 2rem;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(165, 215, 232, 0.1);
+    }
+
+    .profile-image-container {
+        position: relative;
+    }
+
+    .profile-image {
+        width: 100%;
+        border-radius: 15px;
+        border: 3px solid var(--cyber-green);
+    }
+
+    .profile-decoration {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 2px solid var(--cyber-green);
+        border-radius: 15px;
+        top: 15px;
+        left: 15px;
+        z-index: -1;
+    }
+
+    .profile-content h1 {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--cyber-green);
+    }
+
+    .profile-content p {
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+    }
+
+    /* Timeline Section */
+    .timeline-section {
+        margin: 4rem 0;
+    }
+
+    .timeline-container {
+        position: relative;
+        padding: 2rem 0;
+    }
+
+    .timeline-container::before {
+        content: '';
+        position: absolute;
+        width: 2px;
+        height: 100%;
+        background: var(--cyber-green);
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .timeline-item {
+        display: flex;
+        justify-content: flex-end;
+        padding-left: 30px;
+        position: relative;
+        margin-bottom: 2rem;
+        width: 50%;
+    }
+
+    .timeline-item:nth-child(odd) {
+        align-self: flex-end;
+        justify-content: flex-start;
+        padding-left: 0;
+        padding-right: 30px;
+    }
+
+    .timeline-content {
+        background: rgba(25, 55, 109, 0.3);
+        padding: 1.5rem;
+        border-radius: 10px;
+        width: 100%;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(165, 215, 232, 0.1);
+    }
+
+    .timeline-content:hover {
+        border-color: var(--cyber-green);
+        transform: translateY(-5px);
+        transition: all 0.3s ease;
+    }
+
+    .timeline-date {
+        font-family: 'JetBrains Mono', monospace;
+        color: var(--cyber-green);
+        margin-bottom: 0.5rem;
+    }
+
+    /* Skills & Certifications */
+    .skills-certifications {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin: 4rem 0;
+    }
+
+    .skills-list, .certifications-list {
+        background: rgba(25, 55, 109, 0.3);
+        padding: 2rem;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(165, 215, 232, 0.1);
+    }
+
+    .skill-item {
+        margin-bottom: 1.5rem;
+    }
+
+    .skill-name {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+    }
+
+    .progress-bar {
+        height: 6px;
+        background: rgba(165, 215, 232, 0.1);
+        border-radius: 3px;
+        overflow: hidden;
+    }
+
+    .progress {
+        height: 100%;
+        background: var(--cyber-green);
+        border-radius: 3px;
+        transition: width 1s ease;
+    }
+
+    .certification-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        background: rgba(165, 215, 232, 0.1);
+        border-radius: 8px;
+    }
+
+    .cert-icon {
+        font-size: 2rem;
+        color: var(--cyber-green);
+        margin-right: 1rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 968px) {
+        .profile-section {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .skills-certifications {
+            grid-template-columns: 1fr;
+        }
+
+        .timeline-container::before {
+            left: 0;
+        }
+
+        .timeline-item {
+            width: 100%;
+            padding-left: 30px;
+        }
+
+        .timeline-item:nth-child(odd) {
+            padding-right: 0;
+            padding-left: 30px;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-    <section id="about" style="background-color: #f4f4f4; padding: 50px 20px;">
-    <div class="container" style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
-        <h1 style="text-align: center; color: #333;">About Me</h1>
-        <p style="font-size: 18px; color: #555; line-height: 1.6;">I’m <strong style="color: #0073e6;"><a href=" {{ url_for('home') }} " style="color: #0073e6; text-decoration: none;">Francis Mwendwa</a></strong> with a strong background in <strong>cloud computing, network architecture, cybersecurity, and software development</strong>. With expertise in <strong>AWS, Python (Flask & Django), Terraform, and Docker</strong>, I specialize in building scalable cloud solutions, automating infrastructure, and securing networks.</p>
+<div class="about-container">
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="profile-image-container">
+            <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Francis Mutiso" class="profile-image">
+            <div class="profile-decoration"></div>
+        </div>
+        <div class="profile-content">
+            <h1>About Me</h1>
+            <p>Hello! I'm Francis Mutiso, a Cloud and Network Security Specialist based in Kenya. Currently enrolled in the Cyber Shujaa program, I specialize in designing and implementing secure network infrastructures and cloud solutions.</p>
+            <p>With over 2 years of experience in the ICT sector, I've developed a passion for creating robust security solutions and optimizing network performance. My work at the Ministry of Education has allowed me to impact educational institutions across Kenya through improved technological infrastructure.</p>
+            <p>I believe in continuous learning and staying ahead of the curve in the ever-evolving tech landscape. My approach combines technical expertise with practical problem-solving to deliver reliable and secure solutions.</p>
+        </div>
+    </section>
 
-        <p style="font-size: 18px; color: #555; line-height: 1.6;">I have <strong>hands-on experience</strong> working with <strong>enterprise solutions</strong> and have collaborated on projects involving <strong>Google Cloud, Azure DevOps, and cybersecurity frameworks</strong>. My journey started with a <strong>Bachelor’s degree in Information Technology</strong> from <strong>Kenyatta University</strong>, and since then, I’ve obtained key certifications, including:</p>
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <h2>Professional Journey</h2>
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">2023 - Present</div>
+                    <h3>Networking Officer</h3>
+                    <p>Ministry of Education - Lari Sub County Offices</p>
+                    <ul>
+                        <li>Network infrastructure optimization</li>
+                        <li>Security implementation</li>
+                        <li>System administration</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Add more timeline items as needed -->
+        </div>
+    </section>
 
-        <ul style="font-size: 18px; color: #555; line-height: 1.6; list-style-type: none; padding-left: 0;">
-            <li style="background: #0073e6; color: white; padding: 10px; border-radius: 5px; margin-bottom: 5px;">AWS Cloud practitioner</li>
-            <li style="background: #0073e6; color: white; padding: 10px; border-radius: 5px; margin-bottom: 5px;">AWS Solution Architect Associate</li>
-            <li style="background: #0073e6; color: white; padding: 10px; border-radius: 5px; margin-bottom: 5px;">Cisco Introduction to Cybersecurity</li>
-            <li style="background: #0073e6; color: white; padding: 10px; border-radius: 5px; margin-bottom: 5px;">Cisco Endpoint Security</li>
-            <li style="background: #0073e6; color: white; padding: 10px; border-radius: 5px; margin-bottom: 5px;">Cisco Network Defense</li>
-        </ul>
+    <!-- Skills & Certifications -->
+    <div class="skills-certifications">
+        <div class="skills-list">
+            <h2>Technical Skills</h2>
+            <div class="skill-item">
+                <div class="skill-name">
+                    <span>Network Security</span>
+                    <span>90%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 90%"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-name">
+                    <span>Cloud Infrastructure</span>
+                    <span>85%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 85%"></div>
+                </div>
+            </div>
+            <!-- Add more skills -->
+        </div>
 
-        <p style="font-size: 18px; color: #555; line-height: 1.6;">Beyond cloud and network engineering, I enjoy researching emerging technologies, optimizing system performance, and mentoring aspiring tech professionals. My experience includes working with organizations such as the <strong>Ministry of Education</strong> (EMIS) and <strong>AICO</strong>, where I contributed to IT infrastructure and data-driven solutions.</p>
-
-        <p style="font-size: 18px; color: #555; line-height: 1.6;">Currently, I’m expanding my expertise in <strong>cybersecurity</strong>, learning about <strong>endpoint security, network defense, and ethical hacking</strong>, while also improving my skills in <strong>Dockerization and Kubernetes</strong>.</p>
-
-        <h2 style="text-align: center; color: #333; margin-top: 30px;">Let’s Connect!</h2>
-        <p style="font-size: 18px; text-align: center; color: #0073e6;"><strong><a href=" {{ url_for('contact') }}" style="color: #0073e6; text-decoration: none;">Contact Me</a></strong></p>
+        <div class="certifications-list">
+            <h2>Certifications</h2>
+            <div class="certification-item">
+                <i class="fas fa-certificate cert-icon"></i>
+                <div>
+                    <h3>Cyber Shujaa Program</h3>
+                    <p>Cloud and Network Security Specialization</p>
+                </div>
+            </div>
+            <!-- Add more certifications -->
+        </div>
     </div>
-</section>
+</div>
+{% endblock %}
 
-{% endblock content %}
+{% block extra_js %}
+<script>
+    // Animation for skill bars on scroll
+    function animateSkills() {
+        const skills = document.querySelectorAll('.progress');
+        skills.forEach(skill => {
+            const width = skill.style.width;
+            skill.style.width = '0';
+            setTimeout(() => {
+                skill.style.width = width;
+            }, 200);
+        });
+    }
+
+    // Trigger animation when section is in view
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateSkills();
+            }
+        });
+    });
+
+    observer.observe(document.querySelector('.skills-list'));
+</script>
+{% endblock %}

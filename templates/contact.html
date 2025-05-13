@@ -1,28 +1,337 @@
 {% extends "layout.html" %}
-{% block content %}
-    <section id="contact" style="background-color: #f4f4f4; padding: 50px 20px;">
-        <div class="container" style="max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
-            <h1 style="text-align: center; color: #333;">Contact Me 📩</h1>
-            <p style="font-size: 18px; color: #555; line-height: 1.6; text-align: center;">
-                Feel free to reach out to me for any inquiries or collaborations.
-            </p>
 
-            <div style="text-align: center; margin-bottom: 20px;">
-                <p style="font-size: 18px; color: #0073e6;"><strong>📞 Phone:</strong> +254740532715</p>
-                <p style="font-size: 18px; color: #0073e6;"><strong>📧 Email:</strong> <a href="mailto:francismwendwa230@gmail.com" style="color: #0073e6; text-decoration: none;">francismwendwa230@gmail.com</a></p>
+{% block extra_css %}
+<style>
+    .contact-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    /* Contact Header */
+    .contact-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .contact-header h1 {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 2.5rem;
+        color: var(--cyber-green);
+        margin-bottom: 1rem;
+    }
+
+    /* Contact Grid */
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        margin-bottom: 4rem;
+    }
+
+    /* Contact Info Section */
+    .contact-info {
+        background: rgba(25, 55, 109, 0.3);
+        padding: 2rem;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(165, 215, 232, 0.1);
+    }
+
+    .info-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding: 1rem;
+        background: rgba(165, 215, 232, 0.1);
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .info-item:hover {
+        transform: translateX(10px);
+        border-left: 3px solid var(--cyber-green);
+    }
+
+    .info-icon {
+        font-size: 1.5rem;
+        color: var(--cyber-green);
+        margin-right: 1rem;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 255, 159, 0.1);
+        border-radius: 50%;
+    }
+
+    .info-content h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
+        color: var(--light-azure);
+    }
+
+    .info-content p {
+        font-size: 1rem;
+        color: var(--secure-white);
+    }
+
+    /* Contact Form */
+    .contact-form {
+        background: rgba(25, 55, 109, 0.3);
+        padding: 2rem;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(165, 215, 232, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--light-azure);
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 0.8rem;
+        background: rgba(165, 215, 232, 0.1);
+        border: 1px solid rgba(165, 215, 232, 0.1);
+        border-radius: 5px;
+        color: var(--secure-white);
+        font-family: 'Inter', sans-serif;
+        transition: all 0.3s ease;
+    }
+
+    .form-input:focus {
+        outline: none;
+        border-color: var(--cyber-green);
+        background: rgba(165, 215, 232, 0.2);
+    }
+
+    textarea.form-input {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 1rem;
+        background: transparent;
+        border: 2px solid var(--cyber-green);
+        color: var(--cyber-green);
+        border-radius: 5px;
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .submit-btn:hover {
+        background: var(--cyber-green);
+        color: var(--navy);
+    }
+
+    /* Social Links */
+    .social-links-section {
+        text-align: center;
+        margin-top: 4rem;
+    }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .social-link {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(165, 215, 232, 0.1);
+        border-radius: 50%;
+        color: var(--cyber-green);
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+        transform: translateY(-5px);
+        background: var(--cyber-green);
+        color: var(--navy);
+    }
+
+    /* Success Message */
+    .success-message {
+        display: none;
+        background: rgba(0, 255, 159, 0.1);
+        border: 1px solid var(--cyber-green);
+        color: var(--cyber-green);
+        padding: 1rem;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .contact-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .info-item:hover {
+            transform: none;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="contact-container">
+    <!-- Contact Header -->
+    <div class="contact-header">
+        <h1>Get In Touch</h1>
+        <p>Let's discuss your next project or collaboration opportunity</p>
+    </div>
+
+    <!-- Contact Grid -->
+    <div class="contact-grid">
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="info-content">
+                    <h3>Email</h3>
+                    <p>francis.mutiso@example.com</p>
+                </div>
             </div>
 
-            <hr>
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div class="info-content">
+                    <h3>Phone</h3>
+                    <p>+254 XXX XXX XXX</p>
+                </div>
+            </div>
 
-            <h2 style="text-align: center; color: #333;">Leave a Message 📝</h2>
-            <form action="#" method="post" style="display: flex; flex-direction: column; gap: 15px;">
-                <input type="text" name="name" placeholder="Your Name" required style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px;">
-                <input type="email" name="email" placeholder="Your Email" required style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px;">
-                <input type="text" name="subject" placeholder="Subject" required style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px;">
-                <textarea name="message" rows="5" placeholder="Your Message" required style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px;"></textarea>
-                <button type="submit" style="background-color: #0073e6; color: white; padding: 12px; border: none; border-radius: 5px; font-size: 18px; cursor: pointer;">Send Message</button>
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="info-content">
+                    <h3>Location</h3>
+                    <p>Nairobi, Kenya</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="info-content">
+                    <h3>Working Hours</h3>
+                    <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <div class="success-message" id="successMessage">
+                Message sent successfully! I'll get back to you soon.
+            </div>
+            <form id="contactForm" onsubmit="return handleSubmit(event)">
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Subject</label>
+                    <input type="text" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Message</label>
+                    <textarea class="form-input" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Send Message
+                    <i class="fas fa-paper-plane ml-2"></i>
+                </button>
             </form>
         </div>
-    </section>
+    </div>
 
-{% endblock content %}
+    <!-- Social Links -->
+    <div class="social-links-section">
+        <h2>Connect With Me</h2>
+        <div class="social-links">
+            <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://twitter.com/yourusername" class="social-link" target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        // Here you would typically handle the form submission
+        // For demonstration, we'll just show the success message
+        const successMessage = document.getElementById('successMessage');
+        const form = document.getElementById('contactForm');
+
+        successMessage.style.display = 'block';
+        form.reset();
+
+        setTimeout(() => {
+            successMessage.style.display = 'none';
+        }, 5000);
+
+        return false;
+    }
+
+    // Add floating labels animation
+    const inputs = document.querySelectorAll('.form-input');
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            input.parentElement.classList.add('focused');
+        });
+
+        input.addEventListener('blur', () => {
+            if (!input.value) {
+                input.parentElement.classList.remove('focused');
+            }
+        });
+    });
+</script>
+{% endblock %}

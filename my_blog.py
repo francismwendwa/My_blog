@@ -46,6 +46,10 @@ def about():
 def certificates():
     return render_template('certificates.html')
 
+@app.route('/projects')
+def projects():
+    return render_template('projects.html')
+
 @app.route('/contact')
 def contact():
     return render_template('contact.html')  # You can create a 'contact.html' template for this page
@@ -69,6 +73,10 @@ def login():
         else:
             flash('Login Unsuccessful. Please check username and password', 'danger')
     return render_template('login.html', title='Login', form=form)
+
+@app.context_processor
+def inject_now():
+    return {'current_year': datetime.now().year}
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
