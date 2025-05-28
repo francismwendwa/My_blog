@@ -1,25 +1,270 @@
 {% extends "layout.html" %}
 
+{% block extra_css %}
+<style>
+    .blog-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    /* Header Section */
+    .blog-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .blog-header h1 {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 2.5rem;
+        color: var(--cyber-green);
+        margin-bottom: 1rem;
+    }
+
+    /* Search and Filter Section */
+    .blog-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 3rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .search-container {
+        flex: 1;
+        max-width: 400px;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 0.8rem;
+        background: rgba(25, 55, 109, 0.3);
+        border: 1px solid var(--cyber-green);
+        border-radius: 5px;
+        color: var(--light-azure);
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    .category-filter {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .category-btn {
+        padding: 0.8rem 1.5rem;
+        background: transparent;
+        border: 2px solid var(--cyber-green);
+        color: var(--cyber-green);
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: 'JetBrains Mono', monospace;
+        transition: all 0.3s ease;
+    }
+
+    .category-btn:hover,
+    .category-btn.active {
+        background: var(--cyber-green);
+        color: var(--navy);
+    }
+
+    /* Blog Grid */
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+    }
+
+    .blog-card {
+        background: rgba(25, 55, 109, 0.3);
+        border-radius: 15px;
+        overflow: hidden;
+        border: 1px solid rgba(165, 215, 232, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    .blog-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--cyber-green);
+    }
+
+    .blog-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .blog-content {
+        padding: 1.5rem;
+    }
+
+    .blog-meta {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        color: var(--light-azure);
+    }
+
+    .blog-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--cyber-green);
+    }
+
+    .blog-excerpt {
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+        color: var(--light-azure);
+    }
+
+    .blog-tags {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.5rem;
+    }
+
+    .blog-tag {
+        padding: 0.3rem 0.8rem;
+        background: rgba(165, 215, 232, 0.1);
+        border-radius: 15px;
+        font-size: 0.9rem;
+        color: var(--light-azure);
+    }
+
+    .read-more {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--cyber-green);
+        border-radius: 5px;
+        color: var(--cyber-green);
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .read-more:hover {
+        background: var(--cyber-green);
+        color: var(--navy);
+    }
+
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 3rem;
+    }
+
+    .page-btn {
+        padding: 0.5rem 1rem;
+        background: transparent;
+        border: 1px solid var(--cyber-green);
+        color: var(--cyber-green);
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .page-btn:hover,
+    .page-btn.active {
+        background: var(--cyber-green);
+        color: var(--navy);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .blog-controls {
+            flex-direction: column;
+        }
+
+        .search-container {
+            max-width: 100%;
+        }
+
+        .blog-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-    <div class="container">
-        <h1 class="my-4">Blog</h1>
-
-        {% for post in posts %}
-            <article class="media content-section mb-4">
-                <div class="media-body">
-                    <div class="article-metadata mb-2">
-                        <a class="mr-2 text-primary" href="#">{{ post.author }}</a>
-                        <small class="text-muted">{{ post.date }}</small>
-                    </div>
-                    <h2 class="article-title mb-3">
-                        <a class="text-dark" href="#">{{ post.title }}</a>
-                    </h2>
-                    <p class="article-content">{{ post.content }}</p>
-
-                    <a href="#" class="btn btn-outline-primary btn-sm">Read more</a>
-                </div>
-            </article>
-            <hr class="my-4">
-        {% endfor %}
+<div class="blog-container">
+    <!-- Header Section -->
+    <div class="blog-header">
+        <h1>Blog Posts</h1>
+        <p>Insights on Cloud Computing, Cybersecurity, and Network Infrastructure</p>
     </div>
+
+    <!-- Search and Filter Section -->
+    <div class="blog-controls">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search articles...">
+        </div>
+        <div class="category-filter">
+            <button class="category-btn active">All</button>
+            <button class="category-btn">Cloud</button>
+            <button class="category-btn">Security</button>
+            <button class="category-btn">Network</button>
+        </div>
+    </div>
+
+    <!-- Blog Grid -->
+    <div class="blog-grid">
+        <!-- Blog Card 1 -->
+        <article class="blog-card">
+            <img src="{{ url_for('static', filename='images/blog1.jpg') }}" alt="Blog Post" class="blog-image">
+            <div class="blog-content">
+                <div class="blog-meta">
+                    <span>June 15, 2023</span>
+                    <span>5 min read</span>
+                </div>
+                <h2 class="blog-title">Understanding Zero Trust Security</h2>
+                <p class="blog-excerpt">
+                    Explore the principles of Zero Trust Architecture and how it's reshaping modern security practices in cloud environments.
+                </p>
+                <div class="blog-tags">
+                    <span class="blog-tag">Security</span>
+                    <span class="blog-tag">Cloud</span>
+                    <span class="blog-tag">Zero Trust</span>
+                </div>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+        </article>
+
+        <!-- Blog Card 2 -->
+        <article class="blog-card">
+            <img src="{{ url_for('static', filename='images/blog2.jpg') }}" alt="Blog Post" class="blog-image">
+            <div class="blog-content">
+                <div class="blog-meta">
+                    <span>June 10, 2023</span>
+                    <span>4 min read</span>
+                </div>
+                <h2 class="blog-title">Cloud Cost Optimization Strategies</h2>
+                <p class="blog-excerpt">
+                    Learn effective strategies for managing and optimizing your cloud infrastructure costs while maintaining performance.
+                </p>
+                <div class="blog-tags">
+                    <span class="blog-tag">Cloud</span>
+                    <span class="blog-tag">Cost</span>
+                    <span class="blog-tag">AWS</span>
+                </div>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+        </article>
+
+        <!-- Add more blog cards as needed -->
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <button class="page-btn">Previous</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">Next</button>
+    </div>
+</div>
 {% endblock %}

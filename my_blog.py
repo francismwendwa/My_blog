@@ -40,7 +40,11 @@ def home():
 
 @app.route('/about')
 def about():
-    return render_template('about.html')  # You can create an 'about.html' template for this page
+    return render_template('about.html')
+
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
 
 @app.route('/certificates')
 def certificates():

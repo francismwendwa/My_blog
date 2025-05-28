@@ -203,29 +203,32 @@
     <!-- Filter Section -->
     <div class="filter-container">
         <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="network">Network Security</button>
+        <button class="filter-btn" data-filter="network">Cyber Security</button>
         <button class="filter-btn" data-filter="cloud">Cloud Infrastructure</button>
-        <button class="filter-btn" data-filter="automation">Automation</button>
     </div>
 
     <!-- Projects Grid -->
     <div class="projects-grid">
         <!-- Project Card 1 -->
         <div class="project-card" data-category="network">
-            <img src="{{ url_for('static', filename='images/network-project.jpg') }}" alt="Network Infrastructure" class="project-image">
+            <img src="{{ url_for('static', filename='images/network-project.jpeg') }}" alt="Network Infrastructure" class="project-image">
             <div class="project-content">
-                <h2 class="project-title">Educational Network Infrastructure</h2>
+                <h2 class="project-title">Building a Serverless Math Calculator with AWS: Lambda, API Gateway, Amplify & More</h2>
                 <p class="project-description">
-                    Designed and implemented robust network infrastructure for educational institutions, improving connectivity and security.
+                    In today’s cloud-native world, building scalable applications without managing
+                    servers has never been easier. I set out to build a simple but functional Math
+                    Calculator, not just as a utility, but as a hands-on learning project using AWS
+                    serverless technologies. The result? A fast, cost-effective, and completely managed
+                    backend with a sleek front end hosted on the cloud.
                 </p>
                 <div class="project-tech">
-                    <span class="tech-tag">Cisco</span>
-                    <span class="tech-tag">Network Security</span>
-                    <span class="tech-tag">VLANs</span>
+                    <span class="tech-tag">Lambda</span>
+                    <span class="tech-tag">Amplify</span>
+                    <span class="tech-tag">IAM</span>
                 </div>
                 <div class="project-links">
-                    <a href="#" class="project-link" onclick="showProjectDetails(1)">View Details</a>
-                    <a href="#" class="project-link">Live Demo</a>
+                    <a href="https://staging.d1uox9gr9rd3tw.amplifyapp.com/" class="project-link" target="_blank">Test it Yourself</a>
+                    <a href="{{ url_for('blog') }}" class="project-link" target="_blank">Read About It</a>
                 </div>
             </div>
         </div>
@@ -254,103 +257,4 @@
     </div>
 </div>
 
-<!-- Project Details Modal -->
-<div id="projectModal" class="modal">
-    <div class="modal-content">
-        <button class="close-modal" onclick="closeModal()">&times;</button>
-        <img src="" alt="" class="modal-image" id="modalImage">
-        <div class="modal-details">
-            <h2 id="modalTitle" class="project-title"></h2>
-            <div class="modal-section">
-                <h3>Overview</h3>
-                <p id="modalDescription"></p>
-            </div>
-            <div class="modal-section">
-                <h3>Technical Details</h3>
-                <div id="modalTech" class="project-tech"></div>
-            </div>
-            <div class="modal-section">
-                <h3>Challenges & Solutions</h3>
-                <p id="modalChallenges"></p>
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock %}
-
-{% block extra_js %}
-<script>
-    // Filter functionality
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
-
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Remove active class from all buttons
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-
-            const filter = button.dataset.filter;
-
-            projectCards.forEach(card => {
-                if (filter === 'all' || card.dataset.category === filter) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    });
-
-    // Modal functionality
-    const modal = document.getElementById('projectModal');
-    const projectData = {
-        1: {
-            title: "Educational Network Infrastructure",
-            image: "/static/images/network-project.jpg",
-            description: "Comprehensive network infrastructure project for educational institutions...",
-            tech: ["Cisco", "Network Security", "VLANs", "Firewall Configuration"],
-            challenges: "Faced challenges in maintaining network stability during peak usage hours. Implemented load balancing and QoS policies to ensure consistent performance."
-        },
-        2: {
-            title: "Cloud Migration Strategy",
-            image: "/static/images/cloud-project.jpg",
-            description: "Strategic cloud migration project for legacy systems...",
-            tech: ["AWS", "Azure", "Cloud Security", "Migration Tools"],
-            challenges: "Managed complex data migration while ensuring zero data loss and minimal downtime. Implemented robust backup and rollback procedures."
-        }
-    };
-
-    function showProjectDetails(projectId) {
-        const project = projectData[projectId];
-        document.getElementById('modalImage').src = project.image;
-        document.getElementById('modalTitle').textContent = project.title;
-        document.getElementById('modalDescription').textContent = project.description;
-        document.getElementById('modalChallenges').textContent = project.challenges;
-
-        const techContainer = document.getElementById('modalTech');
-        techContainer.innerHTML = '';
-        project.tech.forEach(tech => {
-            const tag = document.createElement('span');
-            tag.className = 'tech-tag';
-            tag.textContent = tech;
-            techContainer.appendChild(tag);
-        });
-
-        modal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-
-    // Close modal when clicking outside
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            closeModal();
-        }
-    }
-</script>
 {% endblock %}
